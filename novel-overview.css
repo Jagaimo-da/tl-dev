@@ -1,0 +1,311 @@
+/* https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Organizing */
+
+/* || GENERAL STYLES */
+/* def: styles which will generally apply unless you do something special with that element */
+/* examples:
+    - body
+    - p
+    - h1, h2, h3, h4, h5
+    - ul and ol
+    - The table properties
+    - Links
+*/
+
+* {
+    /* https://stackoverflow.com/a/62506908 */
+    scroll-behavior: smooth;
+}
+
+/* removing default margins, borders and paddings */
+body,
+button,
+ul,
+li {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+/* default colors */
+body,
+button,
+ul {
+    color: white;
+    background-color: #1a1a1a;
+}
+
+body {
+    text-rendering: optimizeLegibility;
+    font-size: 14px;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* || UTILITIES */
+/* def: styling choices you know you will want to apply to lots of different elements */
+/* examples:
+    - a class that removes the default list style for lists we're going to display as flex items or in some other way
+*/
+
+.no-bullets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* || OVERVIEW */
+/* def: CSS for specific things, broken down by the context, page, or even component in which they are used */
+
+.overview {
+    display: flex;
+    overflow-y: scroll;
+    margin: 0 32px;
+    padding: 0;
+}
+
+
+/* || OVERVIEW HEADER */
+/* def: CSS for specific things, broken down by the context, page, or even component in which they are used */
+
+.overviewHeader {
+    display: flex;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    
+    box-sizing: border-box;
+    height: 50px;
+    width: 100%;
+    
+    border-bottom: 1px solid #686b6c;
+
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+
+    line-height: 50px;
+
+    transition-property: top, width, padding-right;
+    
+    background-color: #1a1a1a;
+}
+
+.overviewHeader__logo {
+    width: 120px;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    font-style: italic;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* || OVERVIEW MAIN */
+/* def: CSS for specific things, broken down by the context, page, or even component in which they are used */
+
+.overviewMain {
+    display: block;
+
+    margin: 50px 0 0 0;
+    padding: 0;
+    
+    width: 60%;
+    max-width: calc(100% - 200px);
+    flex: 1 1 auto;
+}
+
+.back__possibleTabs {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    position: sticky;
+    top: 50px;
+    height: 3em;
+}
+
+.possibleTabs__li {
+    display: inline-block;
+    height: 100%;
+    flex: 0 0 auto;
+    padding: 1em 3em 1em 0;
+}
+
+.possibleTabs__btn {
+    color: white;
+    cursor: pointer;
+    border-bottom: 5px solid transparent;
+}
+.possibleTabs__btn:hover {
+    border-bottom-color: blue;
+}
+.possibleTabs__btn--selected {
+    border-bottom-color: red;
+}
+.possibleTabs__btn--selected:hover {
+    border-bottom-color: red;
+}
+
+.tabContent__tagline {
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+/* || OVERVIEW ASIDE */
+/* def: CSS for specific things, broken down by the context, page, or even component in which they are used */
+.overviewAside {
+    display: inline-block;
+
+    position: sticky;
+    top: 50px;
+    right: 0;
+
+    box-sizing: border-box;
+    margin: 50px 0 0 0;
+    border-left: 1px solid #686b6c;
+    padding: 0;
+
+    width: 439px;
+    min-width: 200px;
+    height: calc(100vh - 50px);
+    
+    overflow-y: scroll;
+}
+
+.overviewAside__item {
+    margin: 0 16px 0 32px;
+}
+
+.overviewAside__header {
+    color: #888;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.overviewAside__toggleChapters {
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: 16px;
+    background-color: gray;
+}
+
+.overviewAside__toc {
+    display: block;
+    padding: 0;
+    list-style-type: none;
+}
+
+/* https://dev.to/francescovetere/css-trick-transition-from-height-0-to-auto-21de */
+.toc__item {
+    display: grid; 
+    grid-template-rows: 1fr;
+    transition: 250ms grid-template-rows ease;
+}
+.toc__item--chapter {
+    border-top: 1px solid #686b6c;
+}
+.toc__item--hidden {
+    grid-template-rows: 0fr;
+}
+
+.toc__itemContentWrapper {
+    overflow: hidden;
+}
+
+.toc__chapterBtn {
+    background: none;
+    border: none;
+    display: flex;
+    color: white;
+    align-items: center;
+    gap: 16px;
+    flex-direction: row;
+    padding: 16px 0;
+    height: auto;
+    width: 100%;
+    cursor: pointer;
+}
+
+.chapterBtn__graphic {
+    min-width: 0;
+    width: auto;
+    height: 1em;
+}
+.chapterBtn__graphic--chapterOpen {
+    transform: rotate(180deg);
+}
+
+.chapterBtn__chapterTitle {
+    display: inline-block;
+    flex: 1 1;
+    align-self: center;
+    min-width: 0;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.3;
+    font-weight: bold;
+}
+
+.chapterBtn__episodesInChapter {
+    display: inline;
+    line-height: 1.2;
+    color: #888;
+    font-size: 11.5px;
+    min-width: 0;
+}
+
+.toc__episodeLink {
+    display: block;
+    line-height: 1.2;
+    padding: 1em 3em 1em 0;
+    cursor: pointer;
+}
+
+.toc__episodeTitle {
+    line-height: 1.5;
+    font-size: 14px;
+}
+.toc__episodeLink:hover .toc__episodeTitle {
+    color: #4baae0;
+}
+
+.toc__episodeTime {
+    line-height: 1.2;
+    font-size: 11.5px;
+    color: #888;
+}
+
+.toc__buoyBtn {
+    line-height: 1.5;
+    font-size: 14px;
+    color: #4baae0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 0;
+    padding: 1em 0 2em 0;
+    border: none;
+    background: none;
+    font-weight: normal;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    box-sizing: border-box;
+}
+.toc__buoyBtn:hover {
+    /* https://www.reddit.com/r/react/comments/qugpys/comment/hkq9zdq/?utm_source=share&utm_medium=mweb3x&utm_name=mweb3xcss&utm_term=1&utm_content=share_button */
+    text-decoration: underline;
+}
+
+.buoyBtn__graphic {
+    min-width: 0;
+    width: auto;
+    height: 1em;
+    box-sizing: border-box;
+}
